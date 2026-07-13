@@ -395,8 +395,8 @@ function banner(c,histAvgCPL,histAvgCTR,histBestCPL){
     </div>
     ${t?`<div class="b-today">
       <div class="bt-item"><div class="bt-val" style="color:var(--txt2)">${fEGP(c.dailyAvg)}</div><div class="bt-lbl">Daily avg spend</div></div>
-      <div class="bt-item"><div class="bt-val" style="color:${t.spend>=c.dailyAvg*0.8?'var(--green)':'var(--yellow)}">${fEGP(t.spend)}</div><div class="bt-lbl">Spent today</div></div>
-      <div class="bt-item"><div class="bt-val" style="color:${burnPct&&burnPct>=70?'var(--green)':'var(--yellow)}">${burnPct!==null?burnPct+'%':'—'}</div><div class="bt-lbl">Pace vs avg</div></div>
+      <div class="bt-item"><div class="bt-val" style="color:${t.spend>=c.dailyAvg*0.8?'var(--green)':'var(--yellow)'}">${fEGP(t.spend)}</div><div class="bt-lbl">Spent today</div></div>
+      <div class="bt-item"><div class="bt-val" style="color:${burnPct&&burnPct>=70?'var(--green)':'var(--yellow)'}">${burnPct!==null?burnPct+'%':'—'}</div><div class="bt-lbl">Pace vs avg</div></div>
     </div>`:'<div style="padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);margin-bottom:14px;font-size:11px;color:var(--sub);text-align:center">No spend today yet — campaign launching</div>'}
     <div class="b-foot">
       <div class="bf-item"><span class="bf-lbl">Frequency</span><span class="bf-val" style="color:${fc}">${c.freq.toFixed(2)}x</span></div>
@@ -441,7 +441,31 @@ function comparison(c,histAvgCPL,histAvgCTR,histBestCPL){
   return rows.map(r=>`<div class="cmp-row"><span class="cmp-lbl">${r.lbl}</span><span class="cmp-cur" style="color:${r.color}">${r.cur}</span><span class="cmp-hist">${r.hist}</span><span class="badge ${r.badge.cls}">${r.badge.t}</span></div>`).join('');
 }
 
-// ═══ CLOCK ═══
+function sortedCamps() {
+  return [...S.camps].sort((a,b)=>{
+    const o={ACTIVE:0,COMPLETED:1};
+    return (o[a.status]??2)-(o[b.status]??2)||b.leads-a.leads;
+  });
+}
+
+function campRow(c) {
+  const isActive = c.status==='ACTIVE';
+  const sc = isActive
+    ? {col:'#34D399',bg:'#34D39912',lbl:'ACTIVE'}
+    : {col:'#5A7090',bg:'#5A709012',lbl:'COMPLETED'};
+  const eng = c.clicks||0;
+  const engC = eng>=500?'var(--teal)':eng>=200?'var(--txt)':'var(--sub)';
+  return `<tr style="border-bottom:1px solid #1C253810">
+    <td style="padding:8px;vertical-align:middle">
+      <div style="font-size:11px;font-weight:600;color:var(--txt);line-height:1.3;margin-bottom:3px">${c.name.length>34?c.name.slice(0,34)+'…':c.name}</div>
+      <span style="display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;letter-spacing:.04em;background:${sc.bg};color:${sc.col};border:1px solid ${sc.col}28">${sc.lbl}</span>
+    </td>
+    <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;font-size:12px;color:var(--teal);padding:8px">${c.leads}</td>
+    <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;font-size:12px;padding:8px;color:${cplC(c.cpl)}">${c.leads>0?fEGP(c.cpl):'—'}</td>
+    <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;font-size:12px;padding:8px;color:${ctrC(c.ctr)}">${c.ctr>0?c.ctr.toFixed(2)+'%':'—'}</td>
+    <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;font-size:12px;padding:8px;color:${engC}">${eng>=1000?(eng/1000).toFixed(1)+'K':eng||'—'}</td>
+  </tr>`;
+}
 function tick(){
   const t=new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   document.getElementById('clk').textContent=t;
