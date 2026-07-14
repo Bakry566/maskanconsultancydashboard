@@ -258,7 +258,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
         <div style="font-size:9px;color:var(--sub);margin-top:8px;line-height:1.5">Both campaigns launched July 14 — only 1 lead in so far, so this rate isn't statistically meaningful yet. Will fill in over the next updates.</div>
       </div>
       <div class="fcol">
-        <div class="fcol-hd" style="color:var(--teal)">All Campaigns<span class="fcol-hd-n">216 contacts · HubSpot</span></div>
+        <div class="fcol-hd" style="color:var(--teal)">All Campaigns<span class="fcol-hd-n">216 contacts</span></div>
         <div id="funnel-all"></div>
         <div class="qrate"><span class="qrate-lbl">Qualify Rate</span><span class="qrate-val" style="color:var(--teal)">16%</span></div>
         <div class="deal-row" style="background:var(--gnbg);border-left:2px solid var(--green);margin-top:8px">
@@ -271,7 +271,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 
   <!-- ⑤ PIPELINE HEALTH -->
   <div>
-    <div class="slbl">Sales Pipeline Health <span class="slbl-r">216 contacts in HubSpot</span></div>
+    <div class="slbl">Sales Pipeline Health <span class="slbl-r">216 total contacts</span></div>
     <div class="pipe-grid">
       <div class="pg" style="border-color:var(--teal)22;background:linear-gradient(145deg,#0D1E1E,var(--s2))">
         <div class="pg-val" style="color:var(--teal)">33</div>
@@ -306,13 +306,13 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 
   <!-- ⑥ TOP 4 ADS -->
   <div>
-    <div class="slbl">Top Performing Ads <span class="slbl-r">Min EGP 1,000 spend · Proven runtime · Balanced leads & engagement</span></div>
+    <div class="slbl">Top Performing Ads <span class="slbl-r">2026 campaigns only · One stand-out metric per rank</span></div>
     <div class="top4-grid" id="top4-grid"></div>
     <div style="margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--s2);border:1px solid var(--bd);font-size:9px;color:var(--sub)">
-      Account avg CTR: <span style="color:var(--gold)">1.40%</span> &nbsp;·&nbsp;
-      Account avg CPL: <span style="color:var(--amber)">EGP 805</span> &nbsp;·&nbsp;
-      Best CPL ever: <span style="color:var(--green)">EGP 570</span> (G & Ora Resale Jun/Jul 26) &nbsp;·&nbsp;
-      Most leads — 1 ad: <span style="color:var(--teal)">51 leads</span> (Hacienda Waters Static)
+      Most leads (2026): <span style="color:var(--gold)">13</span> (2 BDR Resale Apartment) &nbsp;·&nbsp;
+      Lowest CPL (2026): <span style="color:var(--green)">EGP 289</span> (PHD Village De La Capitale — Night Ad) &nbsp;·&nbsp;
+      Highest CTR (2026): <span style="color:var(--amber)">3.60%</span> (6 BDR Resale Villa) &nbsp;·&nbsp;
+      Account avg CPL: <span style="color:var(--teal)">EGP 805</span>
     </div>
   </div>
 
@@ -353,10 +353,10 @@ const FUNNEL_A = [
 ];
 
 const TOP4 = [
-  {r:1,name:'Hacienda Waters Static (1)',camp:'Summer 2025',leads:51,cpl:820,ctr:1.34,eng:1089,acc:'#7EBCB0',note:'Most leads ever from a single ad'},
-  {r:2,name:'Hacienda Waters PHD 12yr',camp:'Summer 2025',leads:30,cpl:723,ctr:1.17,eng:449,acc:'#C4A96B',note:'Strongest CPL among high-volume ads'},
-  {r:3,name:'2 BDR Resale Apartment',camp:'Emaar Cairo Gate May 26',leads:13,cpl:817,ctr:0.91,eng:364,acc:'#9B8FC4',note:'Highest lead count outside Summer 2025'},
-  {r:4,name:'North Coast May Resale',camp:'NC Resale Units May 26',leads:11,cpl:782,ctr:1.73,eng:640,acc:'#D4A843',note:'Best overall balance across all metrics'},
+  {r:1,name:'2 BDR Resale Apartment',camp:'Emaar Cairo Gate May 26',leads:13,cpl:817,ctr:0.91,eng:364,acc:'#9B8FC4',hero:'leads',note:'Most leads of any 2026 ad'},
+  {r:2,name:'PHD Village De La Capitale — Night Ad',camp:'PHD Village De La Capitale Feb 26 V2',leads:8,cpl:289,ctr:0.82,eng:172,acc:'#7FBA9E',hero:'cpl',note:'Lowest CPL of any 2026 ad'},
+  {r:3,name:'6 BDR Resale Villa',camp:'Marina 5 & H.Bay Apr 26',leads:9,cpl:847,ctr:3.60,eng:1231,acc:'#D4A843',hero:'ctr',note:'Highest CTR of any 2026 ad'},
+  {r:4,name:'North Coast May Resale',camp:'NC Resale Units May 26',leads:11,cpl:782,ctr:1.73,eng:640,acc:'#7EBCB0',hero:'eng',note:'Highest engagement volume of any 2026 ad'},
 ];
 
 // HELPERS
@@ -434,9 +434,28 @@ function renderFunnel(id, data, total) {
 function renderTop4() {
   const el = document.getElementById('top4-grid');
   if(!el) return;
-  const maxL = Math.max(...TOP4.map(a=>a.leads));
+  const HERO_LBL = {leads:'Leads Generated', cpl:'Cost Per Lead', ctr:'Click-Through Rate', eng:'Engagements'};
+  const HERO_SCALE = {leads:15, cpl:1000, ctr:4, eng:1400};
+  function heroVal(ad){
+    if(ad.hero==='leads') return String(ad.leads);
+    if(ad.hero==='cpl') return fEGP(ad.cpl);
+    if(ad.hero==='ctr') return ad.ctr.toFixed(2)+'%';
+    return fK(ad.eng);
+  }
+  function heroBarPct(ad){
+    if(ad.hero==='cpl') return Math.max(0,Math.min(100, Math.round((HERO_SCALE.cpl-ad.cpl)/HERO_SCALE.cpl*100)));
+    const v = ad[ad.hero];
+    return Math.max(0,Math.min(100, Math.round(v/HERO_SCALE[ad.hero]*100)));
+  }
   el.innerHTML = TOP4.map(ad => {
-    const lw = pct(ad.leads,maxL);
+    const hw = heroBarPct(ad);
+    const others = ['leads','cpl','ctr','eng'].filter(k=>k!==ad.hero);
+    const metricHtml = others.map(k=>{
+      if(k==='leads') return `<div class="ad-met"><div class="ad-met-val" style="color:${leadsColor(ad.leads)}">${ad.leads}</div><div class="ad-met-lbl">Leads</div></div>`;
+      if(k==='cpl') return `<div class="ad-met"><div class="ad-met-val" style="color:${cplColor(ad.cpl)}">${fEGP(ad.cpl)}</div><div class="ad-met-lbl">CPL</div></div>`;
+      if(k==='ctr') return `<div class="ad-met"><div class="ad-met-val" style="color:${ctrColor(ad.ctr)}">${ad.ctr.toFixed(2)}%</div><div class="ad-met-lbl">CTR</div></div>`;
+      return `<div class="ad-met"><div class="ad-met-val" style="color:${engColor(ad.eng)}">${fK(ad.eng)}</div><div class="ad-met-lbl">Engagements</div></div>`;
+    }).join('');
     return `<div class="ad-card" style="border-color:${ad.acc}22">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${ad.acc}88,transparent)"></div>
       <div class="ad-rank" style="background:${ad.acc}22;color:${ad.acc};border:1px solid ${ad.acc}44">${ad.r}</div>
@@ -445,23 +464,12 @@ function renderTop4() {
         <div class="ad-camp">${ad.camp}</div>
       </div>
       <div class="ad-hero">
-        <div class="ad-hero-val" style="color:${ad.acc}">${ad.leads}</div>
-        <div class="ad-hero-lbl">Leads Generated</div>
-        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:${lw}%;background:${ad.acc}"></div></div>
+        <div class="ad-hero-val" style="color:${ad.acc}">${heroVal(ad)}</div>
+        <div class="ad-hero-lbl">${HERO_LBL[ad.hero]}</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:${hw}%;background:${ad.acc}"></div></div>
       </div>
       <div class="ad-metrics">
-        <div class="ad-met">
-          <div class="ad-met-val" style="color:${ctrColor(ad.ctr)}">${ad.ctr.toFixed(2)}%</div>
-          <div class="ad-met-lbl">CTR</div>
-        </div>
-        <div class="ad-met">
-          <div class="ad-met-val" style="color:${cplColor(ad.cpl)}">${fEGP(ad.cpl)}</div>
-          <div class="ad-met-lbl">CPL</div>
-        </div>
-        <div class="ad-met">
-          <div class="ad-met-val" style="color:${engColor(ad.eng)}">${fK(ad.eng)}</div>
-          <div class="ad-met-lbl">Engagements</div>
-        </div>
+        ${metricHtml}
       </div>
       <div class="ad-bench">${ad.note}</div>
     </div>`;
