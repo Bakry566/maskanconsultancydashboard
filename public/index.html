@@ -261,13 +261,13 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
     <div class="slbl">Lead Stage Breakdown <span class="slbl-r">Currently Running Campaigns vs All Campaigns</span></div>
     <div class="funnel-grid">
       <div class="fcol">
-        <div class="fcol-hd" style="color:var(--gold)">Active Now — Playa & ORA<span class="fcol-hd-n">1 lead</span></div>
+        <div class="fcol-hd" style="color:var(--gold)">Active Now — Playa & ORA<span class="fcol-hd-n">3 leads</span></div>
         <div id="funnel-current"></div>
-        <div class="qrate"><span class="qrate-lbl">Qualify Rate</span><span class="qrate-val" style="color:var(--gold)">100%</span></div>
-        <div style="font-size:9px;color:var(--sub);margin-top:8px;line-height:1.5">Both campaigns launched July 14 — only 1 lead in so far, so this rate isn't statistically meaningful yet. Will fill in over the next updates.</div>
+        <div class="qrate"><span class="qrate-lbl">Qualify Rate</span><span class="qrate-val" style="color:var(--gold)">33%</span></div>
+        <div style="font-size:9px;color:var(--sub);margin-top:8px;line-height:1.5">Both campaigns launched July 14 — still just 3 leads in, so this rate isn't statistically meaningful yet. Will fill in over the next updates.</div>
       </div>
       <div class="fcol">
-        <div class="fcol-hd" style="color:var(--teal)">All Campaigns<span class="fcol-hd-n">216 contacts</span></div>
+        <div class="fcol-hd" style="color:var(--teal)">All Campaigns<span class="fcol-hd-n">218 contacts</span></div>
         <div id="funnel-all"></div>
         <div class="qrate"><span class="qrate-lbl">Qualify Rate</span><span class="qrate-val" style="color:var(--teal)">16%</span></div>
         <div class="deal-row" style="background:var(--gnbg);border-left:2px solid var(--green);margin-top:8px">
@@ -280,7 +280,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 
   <!-- ⑤ PIPELINE HEALTH -->
   <div>
-    <div class="slbl">Sales Pipeline Health <span class="slbl-r">216 total contacts</span></div>
+    <div class="slbl">Sales Pipeline Health <span class="slbl-r">218 total contacts</span></div>
     <div class="pipe-grid">
       <div class="pg" style="border-color:var(--teal)22;background:linear-gradient(145deg,#0D1E1E,var(--s2))">
         <div class="pg-val" style="color:var(--teal)">33</div>
@@ -315,12 +315,12 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 
   <!-- ⑥ TOP 4 ADS -->
   <div>
-    <div class="slbl">Top Performing Ads <span class="slbl-r">2026 campaigns only, excl. Village De La Capitale · One stand-out metric per rank</span></div>
+    <div class="slbl">Top Performing Ads <span class="slbl-r">2026 campaigns only, excl. Village De La Capitale · Ranked by leads generated</span></div>
     <div class="top4-grid" id="top4-grid"></div>
     <div style="margin-top:10px;padding:10px 14px;border-radius:8px;background:var(--s2);border:1px solid var(--bd);font-size:9px;color:var(--sub)">
       Most leads (2026): <span style="color:var(--gold)">13</span> (2 BDR Resale Apartment) &nbsp;·&nbsp;
-      Lowest CPL (2026): <span style="color:var(--green)">EGP 551</span> (Playa & Silver Sands Resale Carousel) &nbsp;·&nbsp;
-      Highest CTR (2026): <span style="color:var(--amber)">3.60%</span> (6 BDR Resale Villa) &nbsp;·&nbsp;
+      Lowest CPL in top tier: <span style="color:var(--green)">EGP 551</span> (Playa & Silver Sands Resale Carousel) &nbsp;·&nbsp;
+      Best 2026 CTR: <span style="color:var(--amber)">3.60%</span> (6 BDR Resale Villa — 9 leads, outside Top 4 by volume) &nbsp;·&nbsp;
       Account avg CPL: <span style="color:var(--teal)">EGP 807</span>
     </div>
   </div>
@@ -350,22 +350,22 @@ const CAMPS = [
 ];
 
 const FUNNEL_C = [
-  ['Site Visit',1,'#D4A843'],
+  ['Site Visit',1,'#D4A843'],['New / Uncontacted',2,'#3D5068'],
 ];
 const FUNNEL_A = [
   ['Not Interested',78,'#C4706B'],['No Answer',41,'#5A5040'],
   ['Qualified',28,'#7EBCB0'],['Unqualified',26,'#C4706B'],
   ["Didn't Sign Up",19,'#2A3040'],['Reseller',13,'#9B8FC4'],
   ['Bought Elsewhere',4,'#C47070'],['Site Visit',3,'#D4A843'],
-  ['Meeting',2,'#C4A96B'],['Already Bought',1,'#90C4B0'],
-  ['Done Deal',1,'#7FBA9E'],
+  ['New / Uncontacted',2,'#3D5068'],['Meeting',2,'#C4A96B'],
+  ['Already Bought',1,'#90C4B0'],['Done Deal',1,'#7FBA9E'],
 ];
 
 const TOP4 = [
-  {r:1,name:'2 BDR Resale Apartment',camp:'Emaar Cairo Gate May 26',leads:13,cpl:817,ctr:0.91,eng:364,acc:'#9B8FC4',hero:'leads',note:'Most leads of any 2026 ad'},
-  {r:2,name:'Playa & Silver Sands Resale Carousel',camp:'G & Ora Developments Jun/Jul 26',leads:10,cpl:551,ctr:1.28,eng:191,acc:'#7FBA9E',hero:'cpl',note:'Lowest CPL of any 2026 ad'},
-  {r:3,name:'6 BDR Resale Villa',camp:'Marina 5 & H.Bay Apr 26',leads:9,cpl:847,ctr:3.60,eng:1231,acc:'#D4A843',hero:'ctr',note:'Highest CTR of any 2026 ad'},
-  {r:4,name:'North Coast May Resale',camp:'NC Resale Units May 26',leads:11,cpl:782,ctr:1.73,eng:640,acc:'#7EBCB0',hero:'eng',note:'Highest engagement volume of any 2026 ad'},
+  {r:1,name:'2 BDR Resale Apartment',camp:'Emaar Cairo Gate May 26',leads:13,cpl:817,ctr:0.91,eng:364,acc:'#9B8FC4',note:'Most leads of any 2026 ad'},
+  {r:2,name:'North Coast May Resale',camp:'NC Resale Units May 26',leads:11,cpl:782,ctr:1.73,eng:640,acc:'#7EBCB0',note:'Ties for 2nd on leads — strong CTR too'},
+  {r:3,name:'Units Resale Carousel — Broader Audience',camp:'Sodic VYE & Karmell Feb 26',leads:11,cpl:927,ctr:1.09,eng:569,acc:'#D4A843',note:'Ties for 2nd on leads, steady volume'},
+  {r:4,name:'Playa & Silver Sands Resale Carousel',camp:'G & Ora Developments Jun/Jul 26',leads:10,cpl:551,ctr:1.28,eng:191,acc:'#7FBA9E',note:'Lowest CPL in the 2026 top tier'},
 ];
 
 // HELPERS
@@ -443,28 +443,9 @@ function renderFunnel(id, data, total) {
 function renderTop4() {
   const el = document.getElementById('top4-grid');
   if(!el) return;
-  const HERO_LBL = {leads:'Leads Generated', cpl:'Cost Per Lead', ctr:'Click-Through Rate', eng:'Engagements'};
-  const HERO_SCALE = {leads:15, cpl:1000, ctr:4, eng:1400};
-  function heroVal(ad){
-    if(ad.hero==='leads') return String(ad.leads);
-    if(ad.hero==='cpl') return fEGP(ad.cpl);
-    if(ad.hero==='ctr') return ad.ctr.toFixed(2)+'%';
-    return fK(ad.eng);
-  }
-  function heroBarPct(ad){
-    if(ad.hero==='cpl') return Math.max(0,Math.min(100, Math.round((HERO_SCALE.cpl-ad.cpl)/HERO_SCALE.cpl*100)));
-    const v = ad[ad.hero];
-    return Math.max(0,Math.min(100, Math.round(v/HERO_SCALE[ad.hero]*100)));
-  }
+  const maxL = Math.max(...TOP4.map(a=>a.leads));
   el.innerHTML = TOP4.map(ad => {
-    const hw = heroBarPct(ad);
-    const others = ['leads','cpl','ctr','eng'].filter(k=>k!==ad.hero);
-    const metricHtml = others.map(k=>{
-      if(k==='leads') return `<div class="ad-met"><div class="ad-met-val" style="color:${leadsColor(ad.leads)}">${ad.leads}</div><div class="ad-met-lbl">Leads</div></div>`;
-      if(k==='cpl') return `<div class="ad-met"><div class="ad-met-val" style="color:${cplColor(ad.cpl)}">${fEGP(ad.cpl)}</div><div class="ad-met-lbl">CPL</div></div>`;
-      if(k==='ctr') return `<div class="ad-met"><div class="ad-met-val" style="color:${ctrColor(ad.ctr)}">${ad.ctr.toFixed(2)}%</div><div class="ad-met-lbl">CTR</div></div>`;
-      return `<div class="ad-met"><div class="ad-met-val" style="color:${engColor(ad.eng)}">${fK(ad.eng)}</div><div class="ad-met-lbl">Engagements</div></div>`;
-    }).join('');
+    const lw = pct(ad.leads,maxL);
     return `<div class="ad-card" style="border-color:${ad.acc}22">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${ad.acc}88,transparent)"></div>
       <div class="ad-rank" style="background:${ad.acc}22;color:${ad.acc};border:1px solid ${ad.acc}44">${ad.r}</div>
@@ -473,12 +454,14 @@ function renderTop4() {
         <div class="ad-camp">${ad.camp}</div>
       </div>
       <div class="ad-hero">
-        <div class="ad-hero-val" style="color:${ad.acc}">${heroVal(ad)}</div>
-        <div class="ad-hero-lbl">${HERO_LBL[ad.hero]}</div>
-        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:${hw}%;background:${ad.acc}"></div></div>
+        <div class="ad-hero-val" style="color:${ad.acc}">${ad.leads}</div>
+        <div class="ad-hero-lbl">Leads Generated</div>
+        <div class="ad-bar-wrap"><div class="ad-bar-fill" style="width:${lw}%;background:${ad.acc}"></div></div>
       </div>
       <div class="ad-metrics">
-        ${metricHtml}
+        <div class="ad-met"><div class="ad-met-val" style="color:${cplColor(ad.cpl)}">${fEGP(ad.cpl)}</div><div class="ad-met-lbl">CPL</div></div>
+        <div class="ad-met"><div class="ad-met-val" style="color:${ctrColor(ad.ctr)}">${ad.ctr.toFixed(2)}%</div><div class="ad-met-lbl">CTR</div></div>
+        <div class="ad-met"><div class="ad-met-val" style="color:${engColor(ad.eng)}">${fK(ad.eng)}</div><div class="ad-met-lbl">Engagements</div></div>
       </div>
       <div class="ad-bench">${ad.note}</div>
     </div>`;
@@ -507,8 +490,8 @@ function tick(){
 
 // INIT
 renderCamps();
-renderFunnel('funnel-current',FUNNEL_C,1);
-renderFunnel('funnel-all',FUNNEL_A,216);
+renderFunnel('funnel-current',FUNNEL_C,3);
+renderFunnel('funnel-all',FUNNEL_A,218);
 renderTop4();
 tick();
 setInterval(tick,1000);
