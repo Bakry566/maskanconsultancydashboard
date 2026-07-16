@@ -63,6 +63,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 .b-live .lpulse{width:6px;height:6px}
 .b-live span{font-size:8px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.1em}
 .b-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.b-kpis-wa{grid-template-columns:repeat(5,1fr)}
 .bk{background:rgba(255,255,255,.025);border:1px solid var(--bd);border-radius:8px;padding:13px 14px}
 .bk-val{font-size:22px;font-weight:600;font-family:'DM Mono',monospace;line-height:1;margin-bottom:5px;letter-spacing:.02em}
 .bk-lbl{font-size:8px;color:var(--sub);text-transform:uppercase;letter-spacing:.1em}
@@ -143,8 +144,8 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 .ftr{border-top:1px solid var(--bd);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:var(--s1);font-size:9px;color:var(--sub);letter-spacing:.04em;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
 
 /* RESPONSIVE */
-@media(max-width:700px){.b-kpis{grid-template-columns:repeat(2,1fr)}.hist-row{grid-template-columns:1fr 1fr}.funnel-grid{grid-template-columns:1fr}.pipe-grid{grid-template-columns:repeat(2,1fr)}.top4-grid{grid-template-columns:repeat(2,1fr)}.b-name{font-size:15px}}
-@media(max-width:420px){.b-kpis{grid-template-columns:repeat(2,1fr)}.bk-val{font-size:18px}.hist-row{grid-template-columns:1fr}.pipe-grid{grid-template-columns:repeat(2,1fr)}.top4-grid{grid-template-columns:1fr}.main{padding:12px 14px}}
+@media(max-width:700px){.b-kpis{grid-template-columns:repeat(2,1fr)}.b-kpis-wa{grid-template-columns:repeat(3,1fr)}.hist-row{grid-template-columns:1fr 1fr}.funnel-grid{grid-template-columns:1fr}.pipe-grid{grid-template-columns:repeat(2,1fr)}.top4-grid{grid-template-columns:repeat(2,1fr)}.b-name{font-size:15px}}
+@media(max-width:420px){.b-kpis{grid-template-columns:repeat(2,1fr)}.b-kpis-wa{grid-template-columns:repeat(2,1fr)}.bk-val{font-size:18px}.hist-row{grid-template-columns:1fr}.pipe-grid{grid-template-columns:repeat(2,1fr)}.top4-grid{grid-template-columns:1fr}.main{padding:12px 14px}}
 </style>
 </head>
 <body>
@@ -174,26 +175,17 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
       <div class="b-name">JUL26 — G Developments Playa</div>
       <div class="b-live"><div class="lpulse"></div><span>Live</span></div>
     </div>
-    <div class="b-kpis">
+    <div class="b-kpis b-kpis-wa">
       <div class="bk"><div class="bk-val" style="color:var(--teal)">4</div><div class="bk-lbl">Total Leads</div><div class="bk-sub">Day 3</div></div>
-      <div class="bk"><div class="bk-val" style="color:var(--green)">EGP 614</div><div class="bk-lbl">Cost Per Lead</div><div class="bk-sub">Trending well</div></div>
-      <div class="bk"><div class="bk-val" style="color:var(--green)">1.58%</div><div class="bk-lbl">CTR</div><div class="bk-sub">Early signal — very limited data</div></div>
-      <div class="bk"><div class="bk-val" style="color:var(--gold)">EGP 2,457</div><div class="bk-lbl">Spend to Date</div><div class="bk-sub">Day 3</div></div>
-    </div>
-    <div style="margin-bottom:16px;padding:12px 14px;border-radius:8px;background:var(--gnbg);border:1px solid var(--green)28;display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div>
-        <div style="font-size:11px;font-weight:600;color:var(--txt)">WhatsApp Campaign — New Channel</div>
-        <div style="font-size:9px;color:var(--sub);margin-top:2px">Click-to-WhatsApp ad running alongside the lead form · EGP 74 spent so far</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div style="font-size:20px;font-weight:600;color:var(--green);font-family:'DM Mono',monospace">1</div>
-        <div style="font-size:9px;color:var(--sub)">Conversations Started</div>
-      </div>
+      <div class="bk"><div class="bk-val" style="color:var(--green)">EGP 624</div><div class="bk-lbl">Cost Per Lead</div><div class="bk-sub">Trending well</div></div>
+      <div class="bk"><div class="bk-val" style="color:var(--green)">1.59%</div><div class="bk-lbl">CTR</div><div class="bk-sub">Early signal — very limited data</div></div>
+      <div class="bk"><div class="bk-val" style="color:var(--gold)">EGP 2,494</div><div class="bk-lbl">Spend to Date</div><div class="bk-sub">Day 3</div></div>
+      <div class="bk"><div class="bk-val" style="color:var(--green)">2</div><div class="bk-lbl">WhatsApp Conversations</div></div>
     </div>
     <div class="b-foot">
-      <div class="bf-item"><span class="bf-lbl">CPM</span><span class="bf-val" style="color:var(--txt2)">EGP 328</span></div>
+      <div class="bf-item"><span class="bf-lbl">CPM</span><span class="bf-val" style="color:var(--txt2)">EGP 324</span></div>
       <div class="bf-item"><span class="bf-lbl">Frequency</span><span class="bf-val" style="color:var(--green)">1.55x</span></div>
-      <div class="bf-item"><span class="bf-lbl">Reach</span><span class="bf-val">4,814</span></div>
+      <div class="bf-item"><span class="bf-lbl">Reach</span><span class="bf-val">4,973</span></div>
       <div class="bf-item"><span class="bf-lbl">Day</span><span class="bf-val" style="color:var(--sub)">3</span></div>
       <span class="freq-pill" style="background:var(--gbg);color:var(--gold);border:1px solid var(--gold)28">Too early to read</span>
     </div>
@@ -206,14 +198,14 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
     </div>
     <div class="b-kpis">
       <div class="bk"><div class="bk-val" style="color:var(--teal)">1</div><div class="bk-lbl">Total Leads</div><div class="bk-sub">First lead in — Day 3</div></div>
-      <div class="bk"><div class="bk-val" style="color:var(--red)">EGP 2,082</div><div class="bk-lbl">Cost Per Lead</div><div class="bk-sub">Single lead so far</div></div>
+      <div class="bk"><div class="bk-val" style="color:var(--red)">EGP 2,089</div><div class="bk-lbl">Cost Per Lead</div><div class="bk-sub">Single lead so far</div></div>
       <div class="bk"><div class="bk-val" style="color:var(--red)">0.66%</div><div class="bk-lbl">CTR</div><div class="bk-sub">Early signal — very limited data</div></div>
-      <div class="bk"><div class="bk-val" style="color:var(--gold)">EGP 2,082</div><div class="bk-lbl">Spend to Date</div><div class="bk-sub">Day 3</div></div>
+      <div class="bk"><div class="bk-val" style="color:var(--gold)">EGP 2,089</div><div class="bk-lbl">Spend to Date</div><div class="bk-sub">Day 3</div></div>
     </div>
     <div class="b-foot">
       <div class="bf-item"><span class="bf-lbl">CPM</span><span class="bf-val" style="color:var(--txt2)">EGP 345</span></div>
-      <div class="bf-item"><span class="bf-lbl">Frequency</span><span class="bf-val" style="color:var(--green)">1.28x</span></div>
-      <div class="bf-item"><span class="bf-lbl">Reach</span><span class="bf-val">4,690</span></div>
+      <div class="bf-item"><span class="bf-lbl">Frequency</span><span class="bf-val" style="color:var(--green)">1.29x</span></div>
+      <div class="bf-item"><span class="bf-lbl">Reach</span><span class="bf-val">4,709</span></div>
       <div class="bf-item"><span class="bf-lbl">Day</span><span class="bf-val" style="color:var(--sub)">3</span></div>
       <span class="freq-pill" style="background:var(--gbg);color:var(--gold);border:1px solid var(--gold)28">Too early to read</span>
     </div>
@@ -259,7 +251,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
         <div class="hc-sub">All time</div>
       </div>
       <div class="hc">
-        <div class="hc-val" style="color:var(--amber)">EGP 810</div>
+        <div class="hc-val" style="color:var(--amber)">EGP 811</div>
         <div class="hc-lbl">Avg CPL</div>
         <div class="hc-sub">Best campaign: EGP 570</div>
       </div>
@@ -331,7 +323,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
       Most leads (2026): <span style="color:var(--gold)">13</span> (2 BDR Resale Apartment) &nbsp;·&nbsp;
       Lowest CPL in top tier: <span style="color:var(--green)">EGP 551</span> (Playa & Silver Sands Resale Carousel) &nbsp;·&nbsp;
       Best 2026 CTR: <span style="color:var(--amber)">3.60%</span> (6 BDR Resale Villa — 9 leads, outside Top 4 by volume) &nbsp;·&nbsp;
-      Account avg CPL: <span style="color:var(--teal)">EGP 810</span>
+      Account avg CPL: <span style="color:var(--teal)">EGP 811</span>
     </div>
   </div>
 
@@ -345,8 +337,8 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-
 <script>
 // DATA
 const CAMPS = [
-  {n:'JUL26 - G Developments Playa',s:'ACTIVE',l:4,cpl:614,ctr:1.58,eng:118},
-  {n:'JUL26 - ORA, Hassan Allam, & La Vista',s:'ACTIVE',l:1,cpl:2082,ctr:0.66,eng:40},
+  {n:'JUL26 - G Developments Playa',s:'ACTIVE',l:4,cpl:624,ctr:1.59,eng:122},
+  {n:'JUL26 - ORA, Hassan Allam, & La Vista',s:'ACTIVE',l:1,cpl:2089,ctr:0.66,eng:40},
   {n:'JUL26 - La Vista, H.Allam, G Devs & Ora Summer',s:'DONE',l:1,cpl:2729,ctr:1.04,eng:69},
   {n:'G & Ora Developments Resale - Jun/Jul 26',s:'DONE',l:10,cpl:570,ctr:1.26,eng:195},
   {n:'North Coast Resale Units - May 2026',s:'DONE',l:13,cpl:700,ctr:1.78,eng:705},
